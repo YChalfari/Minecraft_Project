@@ -1,0 +1,57 @@
+body {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.game-board {
+  display: grid;
+  height: 100vmin;
+  width: 100vmin;
+  grid-template-rows: repeat(20, 1fr);
+  grid-template-columns: repeat(20, 1fr);
+}
+#main {
+  padding: 0 5vh;
+  max-width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#aside {
+  width: 15vw;
+  height: 100vh;
+  background-color: black;
+}
+.element {
+  transform: scale(1);
+}
+.element:hover {
+  transform: scale(0.97);
+  transition: transform 0.2s ease-in-out;
+  border: white 1px solid;
+}
+.dirt {
+  background-image: url("../images/Dirt.png");
+}
+.grass {
+  background-image: url("../images/Grass_Block.png");
+}
+.sky {
+  background-color: skyblue;
+}
+.cloud {
+  background-color: whitesmoke;
+}
+.rock {
+  background-image: url("../images/Cobblestone.png");
+}
+.trunk {
+  background-image: url("../images/Oak_Log.png");
+}
+.leaves {
+  background-image: url("../images/Leaves.png");
+}
