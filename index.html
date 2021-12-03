@@ -9,14 +9,31 @@
   </head>
   <body>
     <main id="main">
+      <div class="start-menu flex-center">
+        <div class="start-content-wrap flex-col flex-center">
+          <img class="logo" src="./images/Minecraft-Logo-PNG.png" alt="" />
+          <button class="btn start-btn">START</button>
+        </div>
+      </div>
       <div class="game-board"></div>
     </main>
     <aside id="aside">
-      <div class="tools-wrapper">
-        <div class="pickaxe tool"></div>
-        <div class="shovel tool"></div>
-        <div class="saw tool"></div>
-        <div class="inventory"></div>
+      <div class="tools-wrapper flex-center flex-col">
+        <div data-tool="pickaxe" class="tool-wrap flex-col flex-center">
+          <div class="pickaxe tool flex-col"></div>
+          <h3 class="tool-name">PICKAXE</h3>
+        </div>
+        <div data-tool="shovel" class="tool-wrap flex-col flex-center">
+          <div class="shovel tool"></div>
+          <h3 class="tool-name">SHOVEL</h3>
+        </div>
+        <div data-tool="axe" class="tool-wrap flex-col flex-center">
+          <div class="axe tool flex-col"></div>
+          <h3 class="tool-name">AXE</h3>
+        </div>
+        <div class="inventory-wrap">
+          <div class="inventory"></div>
+        </div>
       </div>
     </aside>
     <script src="./scripts/game.js" type="module"></script>
