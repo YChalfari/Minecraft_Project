@@ -10,14 +10,17 @@ export const tools = {
 
 const inventory = document.querySelector(".inventory");
 const toolElements = document.querySelectorAll(".tool-wrap");
-
+// inventory
 inventory.addEventListener("click", (e) => {
+  //deselect inventory
   if (tools.activeNode === inventory) {
     inventory.classList.toggle("inventory-active");
     tools.previouslyActiveNode = "";
     tools.active = "";
+    tools.activeNode = "";
     return;
   }
+  //remove focus from active tool
   if (tools.active && tools.active != "inventory" && tools.inventory) {
     tools.activeNode.classList.toggle("active");
   }
@@ -28,11 +31,12 @@ inventory.addEventListener("click", (e) => {
     tools.active = "inventory";
   }
 });
-
+//tools
 toolElements.forEach((tool) =>
   tool.addEventListener("click", () => {
-    if (tools.active === "inventory")
+    if (tools.active === "inventory") {
       inventory.classList.toggle("inventory-active");
+    }
     if (!tools.active || tools.active !== tool.getAttribute("data-tool")) {
       tools.active = tool.getAttribute("data-tool");
       tools.node = tool;
@@ -51,7 +55,7 @@ toolElements.forEach((tool) =>
 export function extractElement(e) {
   let elementType = e.target.getAttribute("data-type");
   //building from inventory logic
-  if (tools.active === "inventory" && tools.inventory) {
+  if (tools.activeNode === inventory && tools.inventory) {
     console.log(isSpaceEmpty(e.target));
     if (isSpaceEmpty(e.target)) {
       e.target.className = tools.inventory;
@@ -59,7 +63,7 @@ export function extractElement(e) {
       inventory.classList.remove(tools.inventory);
       inventory.classList.toggle("inventory-active");
       tools.inventory = tools.active = tools.previouslyActiveNode = "";
-      console.log(tools);
+      tools.activeNode = "";
     } else {
       inventory.classList.toggle("inventory-alert");
       setTimeout(() => {
