@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "minecraft";
 }
 @font-face {
   font-family: "minecraft";
@@ -9,11 +10,10 @@
 }
 body {
   display: flex;
-  font-family: "minecraft";
+
   letter-spacing: 0.5px;
   height: 100vh;
   width: 100vw;
-  justify-content: space-between;
 }
 .flex-col {
   display: flex;
@@ -27,22 +27,24 @@ body {
   align-items: center;
 }
 .game-board {
-  padding: 0 5vw;
   display: grid;
+  max-width: 80vw;
   height: 100vmin;
   width: 100vmin;
   grid-template-rows: repeat(20, 1fr);
   grid-template-columns: repeat(20, 1fr);
-  /* justify-self: center; */
 }
 .start-menu {
-  visibility: hidden;
   position: absolute;
+  z-index: 2;
   height: 100vh;
-  width: 85vw;
+  width: 80vw;
   display: flex;
 
   background: url("../images/bg-tile.gif");
+}
+.hidden {
+  visibility: hidden;
 }
 .start-content-wrap {
   display: flex;
@@ -55,19 +57,34 @@ body {
   width: 35vw;
 }
 .start-btn {
+  display: inline-flex;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  padding: 5px 8px 3px 8px;
+  align-items: center;
+  background-image: url("../images/croppedwall.jpg");
 }
 
 #main {
   position: relative;
-  max-width: calc(100vw - 150px);
-  max-height: 85vh;
-  display: flex;
+  width: 80vw;
 }
 #aside {
-  min-width: 150px;
-  width: 15vw;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20vw;
   height: 100vh;
   background-color: black;
+}
+.tool-wrap {
+  display: flex;
+  color: white;
+  border: 2px white solid;
+  margin-bottom: 15px;
+  width: 100px;
+  cursor: pointer;
 }
 .tool {
   height: 70px;
@@ -76,25 +93,26 @@ body {
   background-size: cover;
   color: white;
 }
+
+.tools-wrapper {
+  transform: translateY(50%);
+}
+
+.inventory {
+  height: 45px;
+  width: 45px;
+  border: 2px white solid;
+}
+.inventory-active {
+  border: 2px solid greenyellow;
+}
 .active,
 .tool-wrap:hover {
   border-color: transparent;
   background-color: blue;
 }
-.tools-wrapper {
-  transform: translateY(50%);
-}
-.tool-wrap {
-  display: flex;
-  color: white;
-  border: 2px white solid;
-  margin-bottom: 15px;
-  width: 100px;
-}
-.inventory {
-  height: 45px;
-  width: 45px;
-  border: 2px white solid;
+.alert {
+  background-color: red;
 }
 .pickaxe {
   background-image: url("../images/new-pickaxe.png");
@@ -106,6 +124,8 @@ body {
   background-image: url("../images/new-shovel.png");
 }
 .element {
+  max-height: 100%;
+  max-width: 100%;
   transform: scale(1);
 }
 .element:hover {
@@ -139,6 +159,12 @@ body {
   body {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: space-between;
+    height: 80vh;
+  }
+  .start-menu {
+    height: 80vh;
+    width: 100vw;
   }
   .game-board {
     padding: 0;
@@ -147,8 +173,9 @@ body {
   #aside {
     height: 15vh;
     width: 100vw;
-    justify-self: flex-start;
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .tools-wrapper {
     flex-direction: row;
@@ -161,8 +188,22 @@ body {
   }
   #main {
     width: 100vw;
-    height: 85vh;
+    height: 80vh;
     display: flex;
     max-width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  .tools-wrapper {
+    flex-flow: wrap;
+  }
+  .tool-wrap {
+    margin: 10px;
+  }
+  #aside {
+    height: 30vh;
+  }
+  .inventory {
+    margin: 10px;
   }
 }

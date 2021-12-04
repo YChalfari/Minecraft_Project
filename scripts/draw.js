@@ -1,25 +1,38 @@
 export function drawElement(block, type) {
   switch (type) {
     case "dirt":
-      block.classList.add("dirt");
+      block.classList.add("element");
+      block.classList.add(`${type}`);
+      block.setAttribute("data-type", type);
       break;
     case "sky":
-      block.classList.add("sky");
+      block.classList.add(`${type}`);
+      block.setAttribute("data-type", type);
       break;
     case "cloud":
-      block.classList.add("cloud");
+      block.classList.add("element");
+      block.classList.add(`${type}`);
+      block.setAttribute("data-type", type);
       break;
     case "rock":
-      block.classList.add("rock");
+      block.classList.add("element");
+      block.classList.add(`${type}`);
+      block.setAttribute("data-type", type);
       break;
     case "grass":
-      block.classList.add("grass");
+      block.classList.add("element");
+      block.classList.add(`${type}`);
+      block.setAttribute("data-type", type);
       break;
     case "trunk":
-      block.classList.add("trunk");
+      block.classList.add("element");
+      block.classList.add(`${type}`);
+      block.setAttribute("data-type", type);
       break;
     case "leaves":
-      block.classList.add("leaves");
+      block.classList.add("element");
+      block.classList.add(`${type}`);
+      block.setAttribute("data-type", type);
       break;
 
     default:

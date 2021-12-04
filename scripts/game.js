@@ -1,6 +1,8 @@
 import { drawElement } from "./draw.js";
-import { tools } from "./tools.js";
+import { tools, extractElement } from "./tools.js";
 import { Elements } from "./resources.js";
+const startMenu = document.querySelector(".start-menu");
+const startMenuBtn = document.querySelector(".start-btn");
 const gameBoard = document.querySelector(".game-board");
 const matrixWorld = [];
 
@@ -10,8 +12,7 @@ function matrixGenerator(arr, rows, cols, blocktype) {
   }
 }
 
-matrixGenerator(matrixWorld, 20, 20);
-function startGame(arr) {
+function drawGame(arr) {
   for (let i = 0; i < arr.length; i++) {
     arr[i].forEach((element, j) => {
       let blockObj = { type: "", position: { x: "", y: "" }, node: "" };
@@ -28,12 +29,10 @@ function startGame(arr) {
       if (i > 14) blockObj.type = "dirt";
       let newElement = document.createElement("div");
       gameBoard.appendChild(newElement);
-      newElement.addEventListener("click", (e) => console.log(e.target));
-      // newElement.addEventListener("mouseover", (e) => console.log(e.target));
+      newElement.addEventListener("click", (e) => {
+        extractElement(e);
+      });
       drawElement(newElement, blockObj.type);
-
-      if (!newElement.classList.contains("sky"))
-        newElement.classList.add("element");
       blockObj.node = newElement;
       blockObj.position.x = j;
       blockObj.position.y = i;
@@ -42,11 +41,6 @@ function startGame(arr) {
   }
   console.log(matrixWorld);
 }
-startGame(matrixWorld);
-
-// function mainClickEvent(e) {
-//   const element = e.target;
-//   drawCloud(){if not cloud checkInventory()}
-//   drawInventory(){if inventory is active}
-//   drawElement()
-// }
+matrixGenerator(matrixWorld, 20, 20);
+drawGame(matrixWorld);
+startMenuBtn.addEventListener("click", () => startMenu.classList.add("hidden"));
