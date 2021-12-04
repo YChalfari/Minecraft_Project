@@ -1,10 +1,11 @@
 import { drawElement } from "./draw.js";
 import { tools, extractElement } from "./tools.js";
 import { Elements } from "./resources.js";
+import { themeSelect } from "./themes.js";
+export const matrixWorld = [];
 const startMenu = document.querySelector(".start-menu");
 const startMenuBtn = document.querySelector(".start-btn");
 const gameBoard = document.querySelector(".game-board");
-const matrixWorld = [];
 
 function matrixGenerator(arr, rows, cols, blocktype) {
   for (let i = 1; i <= rows; i++) {

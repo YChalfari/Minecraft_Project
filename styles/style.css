@@ -106,6 +106,9 @@ body {
 .inventory-active {
   border: 2px solid greenyellow;
 }
+.inventory-alert {
+  border: 2px solid red;
+}
 .active,
 .tool-wrap:hover {
   border-color: transparent;
@@ -123,6 +126,9 @@ body {
 .shovel {
   background-image: url("../images/new-shovel.png");
 }
+select {
+  margin-top: 15px;
+}
 .element {
   max-height: 100%;
   max-width: 100%;
@@ -133,6 +139,7 @@ body {
   transition: transform 0.2s ease-in-out;
   border: white 1px solid;
 }
+/* elements */
 .dirt {
   background-image: url("../images/Dirt.png");
 }
@@ -153,6 +160,13 @@ body {
 }
 .leaves {
   background-image: url("../images/Leaves.png");
+}
+/* themes */
+.night {
+  background-color: rgb(20, 20, 20);
+}
+.night-cloud {
+  background-color: grey;
 }
 
 @media (max-width: 650px) {

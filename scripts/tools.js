@@ -1,9 +1,3 @@
-// export let activeTool = {
-//   activeType: "",
-//   extracts: "",
-//   node: "",
-//   previousNode: "",
-// };
 export const tools = {
   active: "",
   activeNode: "",
@@ -61,15 +55,15 @@ export function extractElement(e) {
     console.log(isSpaceEmpty(e.target));
     if (isSpaceEmpty(e.target)) {
       e.target.className = tools.inventory;
-      e.target.setAttribute("data-type", "tools.inventory");
+      e.target.setAttribute("data-type", tools.inventory);
       inventory.classList.remove(tools.inventory);
       inventory.classList.toggle("inventory-active");
       tools.inventory = tools.active = tools.previouslyActiveNode = "";
       console.log(tools);
     } else {
-      inventory.activeNode.classList.toggle("inventory-alert");
+      inventory.classList.toggle("inventory-alert");
       setTimeout(() => {
-        inventory.activeNode.classList.toggle("inventory-alert");
+        inventory.classList.toggle("inventory-alert");
       }, 300);
     }
   }
