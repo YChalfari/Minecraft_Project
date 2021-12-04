@@ -12,7 +12,7 @@ export const themes = {
     urls: { ground: { name: "sand", url: "url('')" } },
   },
   winter: {
-    changes: ["dirt", "sand"],
+    changes: ["dirt", "sand", "grass"],
     class: "snow",
     urls: { ground: { name: "snow", url: "url('')" } },
   },
