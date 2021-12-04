@@ -1,7 +1,5 @@
 import { drawElement } from "./draw.js";
-import { tools, extractElement } from "./tools.js";
-import { Elements } from "./resources.js";
-import { themeSelect } from "./themes.js";
+import { extractElement } from "./tools.js";
 export const matrixWorld = [];
 const startMenu = document.querySelector(".start-menu");
 const startMenuBtn = document.querySelector(".start-btn");
@@ -16,7 +14,12 @@ function matrixGenerator(arr, rows, cols, blocktype) {
 function drawGame(arr) {
   for (let i = 0; i < arr.length; i++) {
     arr[i].forEach((element, j) => {
-      let blockObj = { type: "", position: { x: "", y: "" }, node: "" };
+      let blockObj = {
+        type: "",
+        position: { x: "", y: "" },
+        node: "",
+        category: "",
+      };
       if (i < 14) blockObj.type = "sky";
       if ((i >= 6 && i <= 7 && j >= 4 && j <= 8) || (i === 7 && j === 3))
         blockObj.type = "cloud";

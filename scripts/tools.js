@@ -1,11 +1,12 @@
-import { themeSelect } from "./themes.js";
+import { drawElement } from "./draw.js";
+import { themes, themeSelect } from "./themes.js";
 export const tools = {
   active: "",
   activeNode: "",
   previouslyActiveNode: "",
-  axe: { extracts: ["trunk", "leaves"] },
-  shovel: { extracts: ["dirt", "grass"] },
-  pickaxe: { extracts: ["rock"] },
+  axe: { extracts: "tree" },
+  shovel: { extracts: "ground" },
+  pickaxe: { extracts: "rock" },
   inventory: "",
 };
 
@@ -53,18 +54,21 @@ toolElements.forEach((tool) =>
     }
   })
 );
+function resetInventory() {
+  inventory.classList.remove(tools.inventory);
+  inventory.classList.toggle("inventory-active");
+  tools.inventory = tools.active = tools.previouslyActiveNode = "";
+  tools.activeNode = "";
+}
 export function extractElement(e) {
+  let elementCategory = e.target.getAttribute("data-category");
   let elementType = e.target.getAttribute("data-type");
   //building from inventory logic
   if (tools.activeNode === inventory && tools.inventory) {
     console.log(isSpaceEmpty(e.target));
     if (isSpaceEmpty(e.target)) {
-      e.target.className = tools.inventory;
-      e.target.setAttribute("data-type", tools.inventory);
-      inventory.classList.remove(tools.inventory);
-      inventory.classList.toggle("inventory-active");
-      tools.inventory = tools.active = tools.previouslyActiveNode = "";
-      tools.activeNode = "";
+      drawElement(e.target, tools.inventory);
+      resetInventory();
     } else {
       inventory.classList.toggle("inventory-alert");
       setTimeout(() => {
@@ -75,16 +79,18 @@ export function extractElement(e) {
 
   //check tool logic for extraction
   if (tools.activeNode != inventory) {
-    if (tools.active && tools[tools.active].extracts.includes(elementType)) {
+    if (tools.active && tools[tools.active].extracts === elementCategory) {
       tools.inventory = e.target.getAttribute("data-type");
       e.target.className = "";
-      if (themeSelect.value === "normal") {
+      if (themes.dayOrNight === "day") {
         e.target.setAttribute("data-type", "sky");
-        e.target.classList.add("sky");
+        e.target.setAttribute("data-category", "empty");
+        e.target.className = "sky";
       }
-      if (themeSelect.value === "night") {
+      if (themes.dayOrNight === "night") {
         e.target.setAttribute("data-type", "night");
-        e.target.classList.add("night");
+        e.target.setAttribute("data-category", "empty");
+        e.target.className = "night";
       }
 
       if (inventory.classList.length > 1)
@@ -105,7 +111,4 @@ export function extractElement(e) {
 function isItemUnder(block, matrix) {}
 //check if block is empty
 const isSpaceEmpty = (block, matrix) =>
-  block.getAttribute("data-type") === "sky" ||
-  block.getAttribute("data-type") === "night"
-    ? true
-    : false;
+  block.getAttribute("data-category") === "empty" ? true : false;

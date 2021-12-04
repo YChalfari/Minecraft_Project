@@ -10,7 +10,7 @@
 }
 body {
   display: flex;
-
+  position: relative;
   letter-spacing: 0.5px;
   height: 100vh;
   width: 100vw;
@@ -168,6 +168,12 @@ select {
 .night-cloud {
   background-color: grey;
 }
+.sand {
+  background-image: url("../images/sand.png");
+}
+.snow {
+  background-image: url("../images/snow.png");
+}
 
 @media (max-width: 650px) {
   body {
@@ -177,7 +183,8 @@ select {
     height: 80vh;
   }
   .start-menu {
-    height: 80vh;
+    top: 15vh;
+    height: 85vh;
     width: 100vw;
   }
   .game-board {
@@ -206,8 +213,11 @@ select {
     display: flex;
     max-width: 100%;
   }
+  select {
+    margin-left: 15px;
+  }
 }
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .tools-wrapper {
     flex-flow: wrap;
   }
@@ -219,5 +229,9 @@ select {
   }
   .inventory {
     margin: 10px;
+  }
+  .start-menu {
+    height: calc(100vh - 283px);
+    top: 283px;
   }
 }

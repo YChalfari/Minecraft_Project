@@ -1,47 +1,47 @@
 import { matrixWorld } from "./game.js";
 
 export const themeSelect = document.querySelector("#theme-select");
-console.log(themeSelect);
-const themes = {
-  night: { changes: ["sky"], class: "night" },
+
+export const themes = {
+  normal: { changes: ["snow", "sand", "grass"], class: "dirt" },
+  day: { changes: ["night"], class: "sky" },
+  night: { changes: ["sky", "cloud"], class: "night" },
   beach: {
-    changes: ["dirt", "snow"],
+    changes: ["dirt", "snow", "grass"],
+    class: "sand",
     urls: { ground: { name: "sand", url: "url('')" } },
   },
   winter: {
     changes: ["dirt", "sand"],
+    class: "snow",
     urls: { ground: { name: "snow", url: "url('')" } },
   },
+  dayOrNight: "",
 };
 function drawTheme(arr, theme) {
+  theme === "day"
+    ? (themes.dayOrNight = "day")
+    : theme === "night"
+    ? (themes.dayOrNight = "night")
+    : "";
+  console.log(themes.dayOrNight);
   matrixWorld.forEach((row, i) => {
     row.forEach((block, j) => {
-      if (theme === "night") {
-        drawNight(block);
+      if (
+        themes[theme].changes.includes(block.node.getAttribute("data-type"))
+      ) {
+        if (block.node.classList.length > 1)
+          block.node.classList.remove(block.node.className.split(" ").pop());
+        block.node.classList.add(themes[theme].class);
+        block.node.setAttribute("data-type", themes[theme].class);
+        if (block.node.getAttribute("data-category") === "empty") {
+          block.node.className = themes[theme].class;
+        }
       }
     });
   });
 }
 
-function drawNight(block) {
-  if (block.node.getAttribute("data-type") === "sky") {
-    block.node.classList.remove("sky");
-    block.node.classList.add("night");
-    block.node.setAttribute("data-type", "night");
-  }
-  if (block.node.getAttribute("data-type") === "cloud") {
-    block.node.classList.remove("sky");
-    block.node.classList.add("night-cloud");
-    block.node.setAttribute("data-type", "night-cloud");
-  }
-}
-function drawSand(block) {
-  if (block.node.getAttribute("data-type") === "sky") {
-    block.node.classList.remove("sky");
-    block.node.classList.add("night");
-    block.node.setAttribute("data-type", "night");
-  }
-}
 themeSelect.addEventListener("change", (e) => {
   drawTheme(matrixWorld, e.target.value);
 });
