@@ -1,3 +1,4 @@
+import { themeSelect } from "./themes.js";
 export const tools = {
   active: "",
   activeNode: "",
@@ -77,8 +78,15 @@ export function extractElement(e) {
     if (tools.active && tools[tools.active].extracts.includes(elementType)) {
       tools.inventory = e.target.getAttribute("data-type");
       e.target.className = "";
-      e.target.setAttribute("data-type", "sky");
-      e.target.classList.add("sky");
+      if (themeSelect.value === "normal") {
+        e.target.setAttribute("data-type", "sky");
+        e.target.classList.add("sky");
+      }
+      if (themeSelect.value === "night") {
+        e.target.setAttribute("data-type", "night");
+        e.target.classList.add("night");
+      }
+
       if (inventory.classList.length > 1)
         inventory.classList.remove(inventory.className.split(" ").pop());
       inventory.classList.add(elementType);
@@ -97,4 +105,7 @@ export function extractElement(e) {
 function isItemUnder(block, matrix) {}
 //check if block is empty
 const isSpaceEmpty = (block, matrix) =>
-  block.getAttribute("data-type") === "sky" ? true : false;
+  block.getAttribute("data-type") === "sky" ||
+  block.getAttribute("data-type") === "night"
+    ? true
+    : false;

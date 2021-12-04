@@ -3,14 +3,15 @@ import { matrixWorld } from "./game.js";
 export const themeSelect = document.querySelector("#theme-select");
 console.log(themeSelect);
 const themes = {
-  night: { sky: "black" },
-  beach: { dirt: "url('')", trunk: "url('')", leaves: "url('')" },
-  winter: { dirt: "url('')", trunk: "url('')", leaves: "url('')" },
-};
-const chosenThemes = {
-  night: "",
-  beach: "",
-  winter: "",
+  night: { changes: ["sky"], class: "night" },
+  beach: {
+    changes: ["dirt", "snow"],
+    urls: { ground: { name: "sand", url: "url('')" } },
+  },
+  winter: {
+    changes: ["dirt", "sand"],
+    urls: { ground: { name: "snow", url: "url('')" } },
+  },
 };
 function drawTheme(arr, theme) {
   matrixWorld.forEach((row, i) => {
@@ -32,6 +33,13 @@ function drawNight(block) {
     block.node.classList.remove("sky");
     block.node.classList.add("night-cloud");
     block.node.setAttribute("data-type", "night-cloud");
+  }
+}
+function drawSand(block) {
+  if (block.node.getAttribute("data-type") === "sky") {
+    block.node.classList.remove("sky");
+    block.node.classList.add("night");
+    block.node.setAttribute("data-type", "night");
   }
 }
 themeSelect.addEventListener("change", (e) => {
