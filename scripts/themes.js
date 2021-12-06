@@ -24,8 +24,7 @@ function drawTheme(arr, theme) {
     : theme === "night"
     ? (themes.dayOrNight = "night")
     : "";
-  console.log(themes.dayOrNight);
-  matrixWorld.forEach((row, i) => {
+  arr.forEach((row, i) => {
     row.forEach((block, j) => {
       if (
         themes[theme].changes.includes(block.node.getAttribute("data-type"))
